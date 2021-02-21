@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<!-- Importing common headers -->
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+	<!-- Starts Outer Container -->
+	<div class="container-fluid">
+		<!-- Importing nav bar common code -->
+		<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<!-- Stating Inner Container -->
+		<div class="container">
+			<h2 class="text-white text-center bg-info font-weight-bold font-italic p-1 mt-2 mb-0"><em>Purchase Order Details</em></h2>
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+					<!-- Card Starting Here -->
+					<div class="card">
+						<!-- Card Body staring Here -->
+						<div class="card-body">
+							<!-- <div class="row">
+								<div class="col-2">
+									<button id="print" class="btn btn-danger" onclick="window.print()">Print Invoice</button>
+								</div>
+							</div> -->
+							<!-- Starting 1st Row -->
+							<div class="row">
+								<div class="col-md-2 text-right">
+									<label>Order Code</label>
+								</div>
+								<div class="col-md-5">
+									<input type="text" th:field="*{purchaseOrder.orderCode}" class="form-control" readonly="readonly">
+								</div>
+								<div class="col-md-1 text-right">
+									<label>Status</label>
+								</div>
+								<div class="col-md-4">
+									<input type="text" th:field="*{purchaseOrder.status}" class="form-control" readonly="readonly">
+								</div>
+							</div>
+							<!-- Ending 1st Row -->
+							
+							<!-- Starting 2st Row -->
+							<div th:if="${purchaseOrder.status == 'PICKING' || purchaseOrder.status == 'OPEN'}" class="row mt-2">
+								<div class="col-md-12">
+								<!--starting fieldset -->
+								<fieldset class="border form-group p-2">
+									<legend class="w-auto px-3 font-italic" style="width:120px;"><h6>ADD PARTS</h6></legend>
+										<!--Starting Part Form -->
+										<form th:action="@{/purchaseorder/addpart}" method="post" th:object="${purchaseDtl}">
+											<input type="hidden" th:field="*{purchaseOrder.id}">
+											<div class="row">
+												<div class="col-md-2 text-right">
+													<label>Select Part</label>
+												</div>
+												<div class="col-md-4">
+													<select th:field="*{part.id}" class="form-control">
+														<option value="">--SELECT--</option>
+														<option th:each="part:${partList}" th:value="${part.key}" th:text="${part.value}"></option>
+													</select>
+												</div>
+												<div class="col-md-1 text-right">
+													<label>Quantity</label>
+												</div>
+												<div class="col-md-3">
+													<input type="number" th:field="*{qty}" class="form-control" min="0">
+												</div>
+												<div class="col-md-2">
+													<button type="submit" class="btn btn-block btn-info"><span class="fas fa-cart-arrow-down text-white fa-lg"></span></button>
+												</div>
+											</div>
+										</form>
+								<!--Ending Part Form -->
+									</fieldset>
+								<!--Ending fieldset -->
+								</div>
+							</div>
+							<!-- Ending 2st Row -->
+							<hr/>
+							<!-- Starting 3rd row -->
+							<div class="row">
+								<!-- Starting table -->
+								<table th:if="${purchaseOrder.status == 'PICKING' || purchaseOrder.status == 'ORDERED'}" class="table">
+									<tr class=" bg-light text-info text-center">
+										<th>S.No</th>
+										<th>Part</th>
+										<th>Base Cost</th>
+										<th>Qty</th>
+										<th th:if="${purchaseOrder.status == 'PICKING'}">Operation</th>
+									</tr>
+									<tr th:each="obj,i:${purchaseDtlList}" class="text-center">
+										<td th:text="${i.count}"></td>
+										<td th:text="${obj.part.partCode}"></td>
+										<td th:text="${obj.part.baseCost}"></td>
+										<td th:text="${obj.qty}"></td>
+										<td th:if="${purchaseOrder.status == 'PICKING'}">
+											<a th:href="@{/purchaseorder/removepart/{id}/{poId}(id=${obj.id},poId=*{purchaseOrder.id})}" class="btn btn-danger" title="Remove Parts"><span class="fas fa-trash fa-lg text-white"></span></a>
+										</td>
+									</tr>
+								</table>
+								<!-- Ending table -->
+							</div>
+							<!-- Ending 3rd row -->
+							<!-- Starting 4th row -->
+							<div class="row" th:if="${purchaseOrder.status == 'PICKING'}">
+								<div class="col-4"></div>
+								<div class="col-4">
+									<a th:href="@{/purchaseorder/confirmorder/{poId}(poId=${purchaseOrder.id})}" class="btn btn-info btn-block"><span class="font-weight-bold font-italic">CONFIRM ORDER</span></a>											
+								</div>
+								<div class="col-4"></div>
+							</div>
+							<!-- Ending 4th row -->
+						</div>
+						<!-- Card Body Ending Here -->
+					</div>
+					<!-- Card Ending Here -->
+				</div>
+				<div class="col-md-1"></div>
+			</div>
+		</div>
+		<!-- Ending Inner Container -->
+	</div>
+	<!-- Ends Outer Container -->
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+	<!-- Outer container starting here -->
+	<div class="container-fluid">
+		<!-- importing navbar -->
+		<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<!-- Inner container starting here -->
+		<div class="container">
+			<h2 class="text-white text-center bg-info font-weight-bold font-italic p-1 mt-2 mb-0"><em>Sale Order Details</em></h2>
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10">
+					<!-- Starting Card  -->				
+					<div class="card">
+						<div class="card-body">
+							<!-- Starting 1st row -->
+							<div class="row">
+								<div class="col-2 text-right">
+									<label>Order Code</label>
+								</div>
+								<div class="col-4">
+									<input type="text" th:field="${saleOrder.orderCode}" class="form-control" readonly="readonly">
+								</div>
+								<div class="col-2 text-right">
+									<label>Status</label>
+								</div>
+								<div class="col-4">
+									<input type="text" th:field="${saleOrder.status}" class="form-control" readonly="readonly">
+								</div>
+							</div>
+							<!-- Ending 1st row -->
+							<!-- Starting 2nd row -->
+							<div class="row">
+								<div class="col-12">
+									<fieldset class="border form-group p-2">
+										<legend class="w-auto px-3 font-italic" style="width:120px;"><h6>ADD PARTS</h6></legend>
+										<form action="@{/saleorder/addpart}" method="post" th:object="saleOrder">
+											<input type="text" th:field="*{saleOrder.orderCode}" type="hidden">
+											<div class="row">
+												<div class="col-2 text-right">
+													<label>Select Part</label>
+												</div>
+												<div class="col-4">
+													<select class="form-control">
+														<option>--SELECT--</option>
+														<option></option>
+													</select>
+												</div>
+												<div class="col-1 text-right">
+													<label>Qty</label>
+												</div>
+												<div class="col-3">
+													<input type="number" class="form-control">
+												</div>
+												<div class="col-2">
+													<button class="btn btn-info btn-block"><span class="fal fa-cart-arrow-down"></span></button>
+												</div>
+											</div>
+										</form>
+									</fieldset>
+								</div>
+							</div>
+							<!-- Ending 2nd row -->
+							
+						</div>
+					</div>
+					<!-- Ending Card  -->				
+				</div>
+				<div class="col-1"></div>
+			</div>
+		</div>		
+		<!-- Inner container ending here -->
+		
+	</div>
+	<!-- Outer container ending here -->
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+	<div class=container-fluid>
+	<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+		<h2 class="text-center text-white bg-info font-italic font-weight-bold p-1 mt-2"> Wh User Type Chart</h2>
+			<a th:href="@{/whusertype/all}" class="btn btn-info"><span class="fal fa-arrow-circle-left fa-lg"></span></a>
+			<div class="row">
+				<div class="col-md-6 text-center">
+					<h5 class="text-subhead font-italic"><u>Wh User Type Pie Chart</u></h5>
+					<img th:src="@{/WhUserTypePieChart.png}">
+				</div>
+				<div class="col-md-6 text-center">
+					<h5 class="text-subhead font-italic"><u>Wh User Type Bar Chart</u></h5>
+					<img th:src="@{/WhUserTypeBarChart.png}">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

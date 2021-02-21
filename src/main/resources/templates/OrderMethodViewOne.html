@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+	<div class="container-fluid">
+	<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+		<h2
+			class="text-white text-center bg-info font-weight-bold p-1 mt-2 mb-0">
+			<em>Order Method View Page</em>
+		</h2>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<table class="table table-bordered">
+						<tr>
+							<th>Order Id</th>
+							<td th:text="${obj.id}"></td>
+						</tr>
+						<tr>
+							<th>Order Mode</th>
+							<td th:text="${obj.orderMode}"></td>
+						</tr>
+						<tr>
+							<th>Order Code</th>
+							<td th:text="${obj.orderCode}"></td>
+						</tr>
+						<tr>
+							<th>Order Type</th>
+							<td th:text="${obj.orderType}"></td>
+						</tr>
+						<tr>
+							<th>Order Accept</th>
+							<td th:text="${obj.orderAccept}"></td>
+						</tr>
+						<tr>
+							<th>Description</th>
+							<td th:text="${obj.description}"></td>
+						</tr>
+						<tr class="text-center">
+							<td colspan="2">
+								<a th:href="@{/ordermethod/all}" class="btn btn-secondary">Back To Data Page</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

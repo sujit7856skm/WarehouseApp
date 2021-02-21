@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html   xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<script type="text/javascript" th:src="@{/js/uom.js}"></script>
+<body>
+	
+	<div class="container-fluid">
+		<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+			<h2 class="text-center bg-info p-1 mt-2 font-italic font-weight-bold text-white">Welcome To Uom Register Page</h2>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<form id="uomReg" class="form" th:action="@{/uom/save}" method="post" th:object="${uom}">
+					<div class="form-group mt-1">
+						<label>Uom Type</label>
+						<div>
+							<select class="form-control" th:field="*{uomType}">
+								<option value="">-SELECT-</option>
+								<option value="Packing">Packing</option>
+								<option value="No Packing">No Packing</option>
+								<option value="NA">NA</option>
+							</select>
+						</div>
+						<span id="uomTypeError"></span>
+					</div>
+					<div class="form-group">
+						<label>Uom Model</label>
+						<div>
+							<input type="text" th:field="*{uomModel}" class="form-control"/>
+						</div>
+						<span id="uomModelError"></span>
+					</div>
+					<div class="form-group">
+						<label>Description</label>
+						<div>
+							<textarea th:field="*{description}" class="form-control"></textarea>
+						</div>
+						<span id="descriptionError"></span>
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Create Uom" class="btn btn-primary btn-block">
+					</div>
+				</form>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+		<div th:if="${message != null || errorMessage != null }" class="text-center p-1 bg-info text-white">
+			<span th:text="${message}" class="text-white"></span>
+			<span th:text="${errorMessage}" class="text-white"></span>
+		</div>
+	</div>
+	</div>
+</body>
+</html>

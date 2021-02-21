@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head th:fragment="link">
+<title>Warehouse</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+<style>
+    .errorInput{
+        border-color: red;
+        box-shadow: 1px 1px 1px red;
+    }
+    .errorMsg{
+        color: red;
+        font-size: small;
+    }
+    .text-subhead{
+		color:darkcyan;
+	}
+	.pageColor{
+		color:rgb(120, 15, 7);
+	}
+	.activePage{
+		border: 1px solid blue;
+		border-radius: 5px;;
+		text-decoration-color: white;
+		color: white;
+		background-color: rgb(38, 119, 130);
+	}
+</style>
+<script>
+	$(document).ready(function(){
+		$("#pageNo").hide();
+		var pageNo = $("#pageNo").html(); 
+		
+		var activePage = $("#"+pageNo);
+		activePage.addClass("activePage");
+		
+	});
+</script>
+</head>
+<body>
+	
+	<nav th:fragment="navmenu" class="text-white" style="top:0;box-shadow: 5px 10px 5px rgb(94, 93, 93);">
+		<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+			<a class="navbar-brand text-white font-weight-bold font-italic" href="#">WAREHOUSE</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> UOM </a>
+						<div class="dropdown-menu bg-secondary" style="box-shadow: 5px 10px 5px rgb(94, 93, 93);" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" th:href="@{/uom/register}">Register</a> <a
+								class="dropdown-item" th:href="@{/uom/all}">All</a>
+							<a class="dropdown-item"  th:href="@{/uom/chart}">Chart</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Order Method </a>
+						<div class="dropdown-menu bg-secondary" style="box-shadow: 5px 10px 5px rgb(94, 93, 93);" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" th:href="@{/ordermethod/register}">Register</a> <a
+								class="dropdown-item" th:href="@{/ordermethod/all}">All</a>
+							<a class="dropdown-item"  th:href="@{/ordermethod/chart}">Chart</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Wh User Type </a>
+						<div class="dropdown-menu bg-secondary" style="box-shadow: 5px 10px 5px rgb(94, 93, 93);" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" th:href="@{/whusertype/register}">Register</a> <a
+								class="dropdown-item" th:href="@{/whusertype/all}">All</a>
+							<a class="dropdown-item"  th:href="@{/whusertype/chart}">Chart</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Shipment Type </a>
+						<div class="dropdown-menu bg-secondary" style="box-shadow: 5px 10px 5px rgb(94, 93, 93);" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" th:href="@{/shipmenttype/register}">Register</a> <a
+								class="dropdown-item" th:href="@{/shipmenttype/all}">All</a>
+							<a class="dropdown-item"  th:href="@{/shipmenttype/chart}">Chart</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Part </a>
+						<div class="dropdown-menu bg-secondary" style="box-shadow: 5px 10px 5px rgb(94, 93, 93);" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" th:href="@{/part/register}">Register</a> <a
+								class="dropdown-item" th:href="@{/part/all}">All</a>
+							<a class="dropdown-item"  th:href="@{/part/chart}">Chart</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Purchase Order </a>
+						<div class="dropdown-menu bg-secondary" style="box-shadow: 5px 10px 5px rgb(94, 93, 93);" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" th:href="@{/purchaseorder/register}">Register</a>
+							 <a class="dropdown-item" th:href="@{/purchaseorder/all}">All</a>
+							<a class="dropdown-item"  th:href="@{/purchaseorder/chart}">Chart</a>
+						</div>
+					</li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Sale Order </a>
+						<div class="dropdown-menu bg-secondary" style="box-shadow: 5px 10px 5px rgb(94, 93, 93);" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" th:href="@{/saleorder/register}">Register</a> <a
+								class="dropdown-item" th:href="@{/saleorder/all}">All</a>
+							<a class="dropdown-item"  th:href="@{/saleorder/chart}">Chart</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</nav>
+</body>
+</html>

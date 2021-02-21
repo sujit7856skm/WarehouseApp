@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+<div class="container-fluid">
+<div th:insert="fragment/CommonUi :: navmenu"></div>
+	<div class="container">
+	<h2 class="text-white text-center bg-info font-weight-bold p-1 mt-2 mb-0"><em>Sale Order Data Page</em></h2>
+		<a th:href="@{/saleorder/excel}" class="btn btn-light"><span class="fal fa-file-excel fa-lg text-success"></span> Export all in Excel</a>
+		<a th:href="@{/saleorder/pdf}" class="btn btn-light"><span class="fal fa-file-pdf fa-lg text-danger"></span> Export all in PDF</a>
+		<a th:href="@{/saleorder/chart}" class="btn btn-light"><span class="fal fa-chart-bar fa-lg text-warning"></span> Chart</a>
+		<table class="table table-hover table-bordered mb-0">
+			<tr class="bg-dark text-white text-center">
+				<th>Order Code</th>
+				<th>Shipment Code</th>
+				<th>Customer</th>
+				<th>Reference Number</th>
+				<th>Stock Mode</th>
+				<th>Status</th>
+				<th>Operation</th>
+			</tr>
+			<tr th:each="obj:${page.content}" class="text-center">
+				<td th:text="${obj.orderCode}"></td>
+				<td th:text="${obj.shipmentType.shipmentCode}"></td>
+				<td th:text="${obj.whUserType.userCode}"></td>
+				<td th:text="${obj.refNum}"></td>
+				<td th:text="${obj.stockMode}"></td>
+				<td th:text="${obj.status}"></td>
+				<td class="btn-group">
+					<a th:href="@{/saleorder/view/{id}(id=${obj.id})}" class="btn" title="View"><span class="fal fa-eye fa-lg text-secondary"></span></a>
+					<a th:href="@{/saleorder/edit/{id}(id=${obj.id})}" class="btn" title="Edit"><span class="fal fa-edit fa-lg text-info"></span></a>
+					<a th:href="@{/saleorder/delete/{id}/{page}(id=${obj.id},page=${page.number})}" class="btn" title="Delete"><span class="far fa-trash fa-lg text-danger"></span></a>
+					<a th:href="@{/saleorder/excel/{id}(id=${obj.id})}" class="btn" title="Export to Excel File"><span class="fal fa-file-excel fa-lg text-success"></span></a>
+					<a th:href="@{/saleorder/pdf/{id}(id=${obj.id})}" class="btn" title="Export to PDF File"><span class="fal fa-file-pdf fa-lg text-danger"></span></a>
+					<a th:href="@{/saleorder/cart/{id}(id=${obj.id})}" class="btn" title="Export to PDF File"><span class="fal fa-cart-plus fa-lg text-info"></span></a>
+				</td>
+			</tr>
+		</table>
+		<th:block th:if="${page.totalPages > 1}">
+		<span id="pageNo" th:text="${page.number}"></span>
+		<nav aria-label="Page navigation example">
+  			<ul class="pagination justify-content-center">
+  				<li class="page-item"><span class="btn pageColor">Page : </span> </li>
+    			<li th:if="${page.hasPrevious()}" class="page-item">
+    					<a class="page-link btn-info" th:href="@{/saleorder/all(page=${page.number}-1)}"><span class="fal fa-chevron-circle-left fa-lg"></span></a>
+    			</li>
+    			<th:block th:each="i:${#numbers.sequence(0, page.totalPages - 1)}">
+	    			<li class="page-item"><a class="page-link" th:id="${i}" th:href="@{/saleorder/all(page=${i})}"><span class="fa-lg">[[${i+1}]]</span></a></li>
+    			</th:block>
+    			<li th:if="${page.hasNext()}" class="page-item">
+    				<a class="page-link btn-info" th:href="@{/saleorder/all(page=${page.number}+1)}"><span class="fal fa-chevron-circle-right fa-lg"></span></a>
+    			</li>
+  			</ul>
+		</nav>
+		</th:block>
+		<div th:if="${message != null || errorMessage != null }" class="text-center p-1 bg-info text-white">
+			<span th:text="${message}" class="text-white"></span>
+			<span th:text="${errorMessage}" class="text-white"></span>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+	<div class="container-fluid">
+	<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+		<h2
+			class="text-white text-center bg-info font-weight-bold p-1 mt-2 mb-0">
+			<em>Part View Page</em>
+		</h2>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<table class="table table-bordered">
+						<tr>
+							<th>Part Id</th>
+							<td th:text="${part.id}"></td>
+						</tr>
+						<tr>
+							<th>Part Code</th>
+							<td th:text="${part.partCode}"></td>
+						</tr>
+						<tr>
+							<th>Part Dimension</th>
+							<td>
+								<span th:text="${part.partWidth}"></span> x
+								<span th:text="${part.partLength}"></span> x 
+								<span th:text="${part.partHeight}"></span>
+							</td>
+						</tr>
+						<tr>
+							<th>Base Cost</th>
+							<td th:text="${part.baseCost}"></td>
+						</tr>
+						<tr>
+							<th>Base Currency</th>
+							<td th:text="${part.baseCurrency}"></td>
+						</tr>
+						<tr>
+							<th>Description</th>
+							<td th:text="${part.description}"></td>
+						</tr>
+						<tr class="text-center">
+							<td colspan="2">
+								<a th:href="@{/part/all}" class="btn btn-secondary">Back To Data Page</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

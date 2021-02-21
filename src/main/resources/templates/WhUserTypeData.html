@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+<div class="container-fluid">
+<div th:insert="fragment/CommonUi :: navmenu"></div>
+	<div class="container">
+		<h2 class="text-white text-center bg-info font-weight-bold p-1 mt-2 mb-0"><em>Wh User Type Data Page</em></h2>
+		<a th:href="@{/whusertype/excel}" class="btn btn-light"><span class="fal fa-file-excel fa-lg text-success"></span> Export all in Excel</a>
+		<a th:href="@{/whusertype/pdf}" class="btn btn-light"><span class="fal fa-file-pdf fa-lg text-danger"></span> Export all in PDF</a>
+		<a th:href="@{/whusertype/chart}" class="btn btn-light"><span class="fal fa-chart-bar fa-lg text-warning"></span> Chart</a>
+		<table class="table table-hover text-center table-bordered">
+			<tr class="bg-dark text-white">
+				<th>User Id</th>
+				<th>User Type</th>
+				<th>User Code</th>
+				<th>User Email</th>
+				<th>Operation</th>
+			</tr>
+			<tr th:each="user:${page.content}">
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.userType}"></td>
+				<td th:text="${user.userCode}"></td>
+				<td th:text="${user.userEmail}"></td>
+				<td class="btn-group">
+					<a th:href="@{/whusertype/view/{id}(id=${user.id})}" class="btn" title="View"><span class="fal fa-eye fa-lg text-secondary"></span></a>
+					<a th:href="@{/whusertype/edit/{id}(id=${user.id})}" class="btn" title="Edit"><span class="fal fa-edit fa-lg text-info"></span></a>
+					<a th:href="@{/whusertype/delete/{id}/{page}(id=${user.id},page=${page.number})}" class="btn" title="Delete"><span class="far fa-trash fa-lg text-danger"></span></a>
+					<a th:href="@{/whusertype/excel/{id}(id=${user.id})}" class="btn" title="Export To Excel File"><span class="fal fa-file-excel fa-lg text-success"></span></a>
+					<a th:href="@{/whusertype/pdf/{id}(id=${user.id})}" class="btn" title="Export To PDF File"><span class="fal fa-file-pdf fa-lg text-danger"></span></a>
+				</td>
+			</tr>
+		</table>
+		<th:block th:if="${page.totalPages > 1}">
+		<span id="pageNo" th:text="${page.number}"></span>
+		<nav aria-label="Page navigation example">
+  			<ul class="pagination justify-content-center">
+  				<li class="page-item"><span class="btn pageColor">Page : </span> </li>
+    			<li th:if="${page.hasPrevious()}" class="page-item">
+    				<a class="page-link btn-info" th:href="@{/whusertype/all(page=${page.number}-1)}"><span class="fal fa-chevron-circle-left fa-lg"></span></a>
+    			</li>
+    			<th:block th:each="i:${#numbers.sequence(0, page.totalPages - 1)}">
+	    			<li class="page-item"><a class="page-link" th:id="${i}" th:href="@{/whusertype/all(page=${i})}"><span class="fa-lg">[[${i+1}]]</span></a></li>
+    			</th:block>
+    			<li th:if="${page.hasNext()}" class="page-item">
+    				<a class="page-link btn-info" th:href="@{/whusertype/all(page=${page.number}+1)}"><span class="fal fa-chevron-circle-right fa-lg"></span></a>
+    			</li>
+  			</ul>
+		</nav>
+		</th:block>
+		<div th:if="${message != null || errorMessage != null }" class="text-center p-1 bg-info text-white">
+			<span th:text="${message}" class="text-white"></span>
+			<span th:text="${errorMessage}" class="text-white"></span>
+		</div>
+	</div>
+</div>
+</body>
+</html>

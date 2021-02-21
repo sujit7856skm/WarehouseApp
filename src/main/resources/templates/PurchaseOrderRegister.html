@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<script type="text/javascript" th:src="@{/js/PurchaseOrderRegister.js}"></script>
+<body>
+<div class="container-fluid">
+<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+		<h2
+			class="text-white text-center bg-info p-1 mt-2 font-weight-bold font-italic">Purchase Order REGISTRATION PAGE</h2>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+
+					<form id="purchaseOrderForm" class="form" th:action="@{/purchaseorder/save}"
+						method="post" th:object="${purchaseOrder}">
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="orderCode">Order Code</label>
+								<div>
+									<input type="text" th:field="*{orderCode}" class="form-control" autoComplete="off">
+								</div>
+								<span id="orderCodeError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="shipmentCode">Shipment Code</label>
+								<div>
+									<select th:field="*{shipmentType.id}" id="shipmentCode" class="form-control">
+										<option value="">--SELECT--</option>
+										<option th:each="ship:${shipmentList}" th:value="${ship.key}" th:text="${ship.value}"></option>
+									</select>
+								</div>
+								<span id="shipmentCodeError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="vendor">Vendor</label>
+								<div>
+									<select th:field="*{whUserType.id}" id="vendor" class="form-control">
+										<option value="">--SELECT--</option>
+										<option th:each="v:${vendorList}" th:value="${v.key}" th:text="${v.value}"></option>
+									</select>
+								</div>
+								<span id="vendorError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="refNum">Reference Number</label>
+								<div>
+									<input type="text" th:field="*{refNum}" class="form-control">
+								</div>
+								<span id="refNumError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="qualityCheck">Quality Check</label>
+								<div>
+									<input type="radio" th:field="*{qualityCheck}" value="Required"> Required
+									<input type="radio" th:field="*{qualityCheck}" value="Not Required"> Not Required									
+								</div>
+								<span id="qltyCheckError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="status">Default Status</label>
+								<div>
+									<input type="text" th:field="*{status}" class="form-control" readonly="readonly">
+								</div>
+								<span id="statusError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="description">Description</label>
+								<div>
+									<textarea th:field="*{description}" class="form-control"></textarea>
+								</div>
+								<span id="descriptionError"></span>
+							</div>
+							
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1">
+								<input type="submit" value="Place Order" class="btn btn-primary btn-block">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<div th:if="${message != null || errorMessage != null }" class="text-center p-1 bg-info text-white">
+				<span th:text="${message}" class="text-white"></span>
+				<span th:text="${errorMessage}" class="text-white"></span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

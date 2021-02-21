@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html  xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+<div class="container-fluid">
+<div th:insert="fragment/CommonUi :: navmenu"></div>
+	<div class="container">
+	<h2 class="text-center text-white bg-info p-1 mt-2 mb-0 font-italic font-weight-bold">Shipment Type Data Page</h2>
+		<div class="row">
+			<div class="col-md-1">
+			
+			</div>
+			<div class="col-md-10">
+				<a th:href="@{/uom/excel}" class="btn btn-light"><span class="fal fa-file-excel fa-lg text-success"></span> Export In Excel</a>
+				<a th:href="@{/uom/pdf}" class="btn btn-light"><span class="fal fa-file-pdf fa-lg text-danger"></span> Export In PDF</a>
+				<a th:href="@{/uom/chart}" class="btn btn-light"><span class="fal fa-chart-bar fa-lg text-warning"></span> Chart</a>
+				<table class="table table-hover text-center table-bordered">
+					<tr class="bg-dark text-white">
+						<!--<th>ID</th>-->
+						<th>Uom Type</th>
+						<th>Uom Model</th>
+						<th>OPERATION</th>
+					</tr>
+					<tr th:each="obj:${page.content}" >
+						<td th:text="${obj.uomType}"></td>
+						<td th:text="${obj.uomModel}"></td>
+						<td class="btn-group">
+							<a th:href="@{/uom/edit/{id}(id=${obj.id})}" class="btn" title="Edit"><span class="fal fa-edit fa-lg text-info"></span></a>
+							<a th:href="@{/uom/delete/{id}/{page}(id=${obj.id},page=${page.number})}" class="btn" title="Delete"><span class="far fa-trash fa-lg text-danger"></span></a>
+							<a th:href="@{/uom/excel/{id}(id=${obj.id})}" class="btn" title="Export to Excel File"><span class="fal fa-file-excel fa-lg text-success"></span></a>
+							<a th:href="@{/uom/pdf/{id}(id=${obj.id})}" class="btn" title="Export to PDF File"><span class="fal fa-file-pdf fa-lg text-danger"></span></a>
+						</td>
+					</tr>
+				</table>
+				<span id="pageNo" th:text="${page.number}"></span>
+				<nav aria-label="Page navigation example">
+  					<ul class="pagination justify-content-center">
+  						<li class="page-item"><span class="btn pageColor">Page : </span> </li>
+    					<li th:if="${page.hasPrevious()}" class="page-item">
+    						<a class="page-link btn-info" th:href="@{/uom/all(page=${page.number}-1)}"><span class="fal fa-chevron-circle-left fa-lg"></span></a>
+    					</li>
+    					<th:block th:each="i:${#numbers.sequence(0, page.totalPages - 1)}">
+	    					<li class="page-item"><a class="page-link" th:id="${i}" th:href="@{/uom/all(page=${i})}"><span class="fa-lg">[[${i+1}]]</span></a></li>
+    					</th:block>
+    					<li th:if="${page.hasNext()}" class="page-item">
+    						<a class="page-link btn-info" th:href="@{/uom/all(page=${page.number}+1)}"><span class="fal fa-chevron-circle-right fa-lg"></span></a>
+    					</li>
+  					</ul>
+				</nav>
+			</div>
+			<div class="col-md-1">
+			
+			</div>
+		</div>
+		<div th:if="${message != null || errorMessage != null }" class="text-center p-1 bg-info text-white">
+			<span th:text="${message}" class="text-white"></span>
+			<span th:text="${errorMessage}" class="text-white"></span>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<script type="text/javascript" th:src="@{/js/ordermethod.js}"></script>
+<body>
+	<div class="container-fluid">
+	<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+			<h2 class="text-white text-center bg-info p-1 mt-2 font-weight-bold font-italic">ORDER METHOD REGISTRATION PAGE</h2>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					
+					<form id="orderMethodForm" class="form" th:action="@{/ordermethod/save}" method="post" th:object="${orderMethod}">
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="orderMode">Order Mode</label>
+								<div>
+									<input type="radio" th:field="*{orderMode}" value="Sale"> Sale
+									<input type="radio" th:field="*{orderMode}" value="Purchase" class="ml-4"> Purchase
+								</div>
+								<span id="orderModeError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="orderCode">Order Code</label>
+								<div>
+									<input type="text" th:field="*{orderCode}" class="form-control">
+								</div>
+								<span id="orderCodeError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="orderType">Order Type</label>
+								<div>
+									<select class="form-control" th:field="*{orderType}">
+										<option value="">--SELECT--</option>
+										<option value="FIFO">FIFO</option>
+										<option value="LIFO">LIFO</option>
+										<option value="FCFO">FCFO</option>
+										<option value="FEFO">FEFO</option>
+									</select>
+								</div>
+								<span id="orderTypeError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="orderAccept">Order Accept</label>
+								<div>
+									<input type="checkbox" th:field="*{orderAccept}" value="Multi-Model"> Multi-Model
+									<input type="checkbox" th:field="*{orderAccept}" value="Accept Return" class="ml-4"> Accept Return
+								</div>
+								<span id="orderAcceptError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="description">Description</label>
+								<div>
+									<textarea  th:field="*{description}" class="form-control"></textarea>
+								</div>
+								<span id="descriptionError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2">
+								<input type="submit" value="Create Order Method" class="btn btn-primary btn-block">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<div th:if="${message != null || errorMessage != null }" class="text-center p-1 bg-info text-white">
+				<span th:text="${message}" class="text-white"></span>
+				<span th:text="${errorMessage}" class="text-white"></span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

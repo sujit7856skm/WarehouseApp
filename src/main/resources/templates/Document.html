@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<script type="text/javascript" th:src="@{/js/Document.js}"></script>
+<body>
+	<div class="container-fluid">
+	<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<h2 class="text-white text-center bg-secondary p-3 font-weight-bold font-italic">DOCUMENT UPLOAD PAGE</h2>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+				<h5 class="text-center font-italic text-white bg-dark p-1 rounded-top mb-0">Upload Section</h5>
+				<div class="pt-1 pb-1 pl-3 pr-3 border rounded-bottom border-primary">
+					<form id="documentForm" class="form" th:action="@{/document/save}" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="docId">Document Id</label>
+							<div>
+								<input type="text" name="docId" id="docId" class="form-control">
+							</div>
+							<span id="docIdError"></span>
+						</div>
+						<div class="form-group">
+							<label for="doc">Document</label>
+							<div>
+								<input type="file" name="doc" id="doc" class="form-control">
+							</div>
+							<span id="docError"></span>
+						</div>
+						<div class="form-group pt-2">
+							<input type="submit" value="Upload Document" class="btn btn-primary btn-block">
+						</div>
+					</form>
+						<div class="row">
+							<div class="col-md-12 form-group pl-5 pr-5 pt-1">
+								<span th:text="${message}" class="text-center text-success" style="align:center"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8 pl-5">
+				<h5 class="text-center font-italic text-white bg-dark p-1 mb-0 rounded-top">Uploaded Documents</h5>
+					<div   style="overflow:scroll;height:450px">
+					<table class="table table-fixed text-center">
+						<thead>
+							<tr>
+								<th>Doc Id</th>
+								<th>Doc Name</th>
+								<th>Download</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="ob:${docList}">
+								<td th:text="${ob[0]}"></td>
+								<td th:text="${ob[1]}"></td>
+								<td ><a th:href="@{/document/download/{id}(id=${ob[0]})}" th:target="_blank" class="btn btn-sm text-success">Download <span class="fa fa-download"></span></a></td>
+							</tr> 
+						</tbody>
+					</table>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>

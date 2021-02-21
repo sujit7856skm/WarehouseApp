@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+	<div class="container-fluid">
+	<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+		<h2
+			class="text-white text-center bg-info font-weight-bold p-1 mt-2 mb-0">
+			<em>Order Method View Page</em>
+		</h2>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<table class="table table-bordered">
+						<tr>
+							<th>User Id</th>
+							<td th:text="${user.id}"></td>
+						</tr>
+						<tr>
+							<th>User Type</th>
+							<td th:text="${user.userType}"></td>
+						</tr>
+						<tr>
+							<th>User Code</th>
+							<td th:text="${user.userCode}"></td>
+						</tr>
+						<tr>
+							<th>User For</th>
+							<td th:text="${user.userFor}"></td>
+						</tr>
+						<tr>
+							<th>User Email</th>
+							<td th:text="${user.userEmail}"></td>
+						</tr>
+						<tr>
+							<th>User Contact</th>
+							<td th:text="${user.userContact}"></td>
+						</tr>
+						<tr>
+							<th>User Id Type</th>
+							<td th:text="${user.userIdType}"></td>
+						</tr>
+						<tr>
+							<th>If Other Id</th>
+							<td th:text="${user.ifOther}"></td>
+						</tr>
+						<tr>
+							<th>Id Number</th>
+							<td th:text="${user.idNumber}"></td>
+						</tr>
+						<tr class="text-center">
+							<td colspan="2">
+								<a th:href="@{/whusertype/all}" class="btn btn-secondary">Back To Data Page</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

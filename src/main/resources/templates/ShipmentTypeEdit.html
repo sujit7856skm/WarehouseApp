@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html   xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+	<div class="container-fluid">
+		<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+		<h2
+			class="text-white text-center bg-info p-1 mt-2 font-weight-bold font-italic">SALE ORDER REGISTRATION PAGE</h2>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+
+					<form id="shipmentTypeForm" class="form" th:action="@{/shipmenttype/update}"
+						method="post" th:object="${shipmentType}">
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<input type="hidden" th:field="*{id}" class="form-control"/>
+								<label>Shipment Mode</label>
+								<div>
+								<select class="form-control" th:field="*{shipmentMode}">
+									<option value="">-SELECT-</option>
+									<option value="Air">Air</option>
+									<option value="Truck">Truck</option>
+									<option value="Train">Train</option>
+									<option value="Ship">Ship</option>
+								</select>
+							</div>
+							<span id="shipmentModeError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label>Shipment Code</label>
+								<div>
+									<input type="text" readonly="readonly"  th:field="*{shipmentCode}" class="form-control"/>
+								</div>
+								<span id="shipmentCodeError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label>Enable Shipment</label>
+								<div>
+									<select class="form-control" th:field="*{enableShipment}">
+										<option value="">-SELECT-</option>
+										<option value="Yes">Yes</option>
+										<option value="No">No</option>
+									</select>
+								</div>
+								<span id="enableShipmentError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label>Shipment Grade</label>
+								<div>
+									<input type="radio" th:field="*{shipmentGrade}" value="A"> A
+									<input type="radio" th:field="*{shipmentGrade}" value="B" class="ml-5"> B
+									<input type="radio" th:field="*{shipmentGrade}" value="C" class="ml-5"> C
+								</div>
+								<span id="shipmentGradeError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label>Description</label>
+								<div>
+									<textarea th:field="*{description}" class="form-control"></textarea>
+								</div>
+								<span id="descriptionError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1">
+								<input type="submit" value="Update Shipment" class="btn btn-primary btn-block">
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<a th:href="@{/shipmenttype/all}" class="btn btn-secondary">Cancel</a>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<div th:if="${message != null || errorMessage != null }" class="text-center p-1 bg-info text-white">
+				<span th:text="${message}" class="text-white"></span>
+				<span th:text="${errorMessage}" class="text-white"></span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

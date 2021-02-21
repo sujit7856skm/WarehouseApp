@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+	<div class="container-fluid">
+	<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+		<h2
+			class="text-white text-center bg-info font-weight-bold p-1 mt-2 mb-0">
+			<em>Sale Order View Page</em>
+		</h2>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<table class="table table-bordered">
+						<tr>
+							<th>Order Id</th>
+							<td th:text="${saleOrder.id}"></td>
+						</tr>
+						<tr>
+							<th>Order Code</th>
+							<td th:text="${saleOrder.orderCode}"></td>
+						</tr>
+						<tr>
+							<th>Shipment Code</th>
+							<td th:text="${saleOrder.shipmentType.shipmentCode}"></td>
+						</tr>
+						<tr>
+							<th>Customer</th>
+							<td th:text="${saleOrder.whUserType.userCode}"></td>
+						</tr>
+						
+						<tr>
+							<th>Reference Number</th>
+							<td th:text="${saleOrder.refNum}"></td>
+						</tr>
+						<tr>
+							<th>Stock Mode</th>
+							<td th:text="${saleOrder.stockMode}"></td>
+						</tr>
+						<tr>
+							<th>Stock Source</th>
+							<td th:text="${saleOrder.stockSource}"></td>
+						</tr>
+						<tr>
+							<th>Status</th>
+							<td th:text="${saleOrder.status}"></td>
+						</tr>
+						<tr>
+							<th>Description</th>
+							<td th:text="${saleOrder.description}"></td>
+						</tr>
+						<tr class="text-center">
+							<td colspan="2">
+								<a th:href="@{/saleorder/all}" class="btn btn-secondary">Back To Data Page</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

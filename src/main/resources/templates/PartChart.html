@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<body>
+	<div class=container-fluid>
+	<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+		<h2 class="text-center bg-info p-1 mt-2 font-weight-bold font-italic text-white">Part Chart</h2>
+			<a th:href="@{/part/all}" class="btn btn-info"><span class="fal fa-arrow-circle-left fa-lg"></span></a>
+			<div class="row">
+				<div class="col-md-6 text-center">
+					<h5 class="text-subhead font-italic"><u>Part UOM Pie Chart</u></h5>
+					<img th:src="@{/PartPieChart.png}">
+				</div>
+				<div class="col-md-6 text-center">
+					<h5 class="text-subhead font-italic"><u>Part UOM Bar Chart</u></h5>
+					<img th:src="@{/PartBarChart.png}">
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<script type="text/javascript" th:src="@{/js/PartRegister.js}"></script>
+<body>
+	<div class="container-fluid">
+	<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+		<h2
+			class="text-white text-center bg-info p-1 mt-2 font-weight-bold font-italic">PART
+			REGISTRATION PAGE</h2>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+
+					<form id="partForm" class="form" th:action="@{/part/save}"
+						method="post" th:object="${part}">
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="partCode">Part Code</label>
+								<div>
+									<input type="text" th:field="*{partCode}" class="form-control">
+								</div>
+								<span id="partCodeError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="partWidth">Part Dimensions</label>
+								<div class="btn-group">
+									<input type="text" th:field="*{partWidth}" class="form-control" placeholder="width">
+									<input type="text" th:field="*{partLength}" class="form-control" placeholder="length"> 
+									<input type="text" th:field="*{partHeight}" class="form-control" placeholder="height">
+								</div>
+								<span id="partDimensionError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="baseCost">Base Cost</label>
+								<div>
+									<input type="text" th:field="*{baseCost}" class="form-control">
+								</div>
+								<span id="baseCostError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="baseCurrency">Base Currency</label>
+								<div>
+									<select class="form-control" th:field="*{baseCurrency}">
+										<option value="">--SELECT--</option>
+										<option value="INR">INR</option>
+										<option value="USD">USD</option>
+										<option value="AUS">AUS</option>
+										<option value="ERU">ERU</option>
+									</select>
+								</div>
+								<span id="baseCurrencyError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="uom">Uom</label>
+								<div>
+									<select th:field="*{uom.id}" id="uom" class="form-control">
+										<option value="">--SELECT--</option>
+										<option th:each="u:${uomList}" th:value="${u.key}" th:text="${u.value}"></option>
+									</select>
+								</div>
+								<span id="uomError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="description">Description</label>
+								<div>
+									<textarea th:field="*{description}" class="form-control"></textarea>
+								</div>
+								<span id="descriptionError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2">
+								<input type="submit" value="Create Part" class="btn btn-primary btn-block">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<div th:if="${message != null || errorMessage != null }" class="text-center p-1 bg-info text-white">
+				<span th:text="${message}" class="text-white"></span>
+				<span th:text="${errorMessage}" class="text-white"></span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<script type="text/javascript" th:src="@{/js/WhUserTypeEdit.js}"></script>
+<body>
+	<div class="container-fluid">
+	<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+			<h2 class="text-white text-center bg-info p-1 mt-2 font-weight-bold font-italic">WH USER TYPE REGISTRATION PAGE</h2>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					
+					<form id="whUserTypeReg" class="form" th:action="@{/whusertype/update}" method="post" th:object="${whUserType}">
+						<input type="hidden" th:field="*{id}" class="form-control">
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="userType">User Type</label>
+								<div>
+									<input type="radio" th:field="*{userType}" value="Sale"> Sale
+									<input type="radio" th:field="*{userType}" value="Purchase" class="ml-4"> Purchase
+								</div>
+								<span id="userTypeError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="userCode">User Code</label>
+								<div>
+									<input type="text" th:field="*{userCode}" class="form-control" readonly="readonly">
+								</div>
+								<span id="userCodeError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="userFor">User For</label>
+								<div>
+									<input type="text" th:field="*{userFor}" class="form-control" readonly="readonly">
+								</div>
+								<span id="userForError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="userEmail">User Email</label>
+								<div>
+									<input type="text" th:field="*{userEmail}" class="form-control">
+								</div>
+								<span id="userEmailError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="userContact">User Contact</label>
+								<div>
+									<textarea th:field="*{userContact}" class="form-control"></textarea>
+								</div>
+								<span id="userContactError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="userIdType">User id Type</label>
+								<div>
+									<select th:field="*{userIdType}" class="form-control">
+										<option value="">--SELECT--</option>
+										<option value="PAN CARD">PAN CARD</option>
+										<option value="AADHAR">AADHAR</option>
+										<option value="VOTER ID">VOTER ID</option>
+										<option value="OTHER">OTHER</option>
+									</select>
+								</div>
+								<span id="userIdTypeError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div id="otherId" class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="ifOther">If Other</label>
+								<div>
+									<input type="text" th:field="*{ifOther}" class="form-control">
+								</div>
+								<span id="ifOtherError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2 pb-2">
+								<label for="idNumber">Id Number</label>
+								<div>
+									<input type="text" th:field="*{idNumber}" class="form-control">
+								</div>
+								<span id="idNumberError"></span>								
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-2">
+								<input type="submit" value="Update User" class="btn btn-primary btn-block">
+							</div>
+						</div>
+					</form>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1">
+								<span th:text="${message}" class="text-center text-success" style="align:center"></span>
+							</div>
+						</div>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

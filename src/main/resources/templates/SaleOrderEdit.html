@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<div th:insert="fragment/CommonUi :: link"></div>
+<script type="text/javascript" th:src="@{/js/SaleOrderEdit.js}"></script>
+<body>
+<div class="container-fluid">
+<div th:insert="fragment/CommonUi :: navmenu"></div>
+		<div class="container">
+		<h2
+			class="text-white text-center bg-info p-1 mt-2 font-weight-bold font-italic">Sale Order Edit PAGE</h2>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+
+					<form id="saleOrderForm" class="form" th:action="@{/saleorder/update}"
+						method="post" th:object="${saleOrder}">
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+									<input type="hidden" th:field="*{id}" class="form-control">
+								<label for="orderCode">Order Code</label>
+								<div>
+									<input type="text" th:field="*{orderCode}" readonly="readonly" class="form-control">
+								</div>
+								<span id="orderCodeError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="shipmentCode">Shipment Code</label>
+								<div>
+									<select th:field="*{shipmentType.id}" id="shipmentCode" class="form-control">
+										<option value="">--SELECT--</option>
+										<option th:each="ship:${shipmentList}" th:value="${ship.key}" th:text="${ship.value}"></option>
+									</select>
+								</div>
+								<span id="shipmentCodeError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="customer">Customer</label>
+								<div>
+									<select th:field="*{whUserType.id}" id="customer" class="form-control">
+										<option value="">--SELECT--</option>
+										<option th:each="c:${customerList}" th:value="${c.key}" th:text="${c.value}"></option>
+									</select>
+								</div>
+								<span id="customerError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="refNum">Reference Number</label>
+								<div>
+									<input type="text" th:field="*{refNum}" class="form-control">
+								</div>
+								<span id="refNumError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="stockMode">Stock Mode</label>
+								<div>
+									<input type="radio" th:field="*{stockMode}" value="GRADE"> GRADE 
+									 <input type="radio" th:field="*{stockMode}" value="MARGIN"> MARGIN									
+								</div>
+								<span id="stockModeError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="stockSource">Stock Source</label>
+								<div>
+									<select th:field="*{stockSource}" class="form-control">
+										<option value="">--SELECT--</option>
+										<option value="OPEN">OPEN</option>
+										<option value="AVAIL">AVAIL</option>
+										<option value="REFUND">REFUND</option>
+									</select>
+								</div>
+								<span id="stockSourceError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="status">Default Status</label>
+								<div>
+									<input type="text" th:field="*{status}" class="form-control" readonly="readonly">
+								</div>
+								<span id="statusError"></span>
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<label for="description">Description</label>
+								<div>
+									<textarea th:field="*{description}" class="form-control"></textarea>
+								</div>
+								<span id="descriptionError"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1">
+								<input type="submit" value="Update Sale Order" class="btn btn-primary btn-block">
+							</div>
+							<div class="col-md-6 form-group pl-5 pr-5 pt-1 pb-1">
+								<a th:href="@{/saleorder/all}" class="btn btn-secondary">Cancel</a>
+							</div>
+						</div>
+					</form>
+					<div class="row">
+						<div class="col-md-6 form-group pl-5 pr-5 pt-1">
+							<span th:text="${message}" class="text-center text-success"
+								style="align: center"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
